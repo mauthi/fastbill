@@ -6,6 +6,8 @@
 
 namespace FastBill;
 
+use Fastbill\Resources\Articles;
+
 define('FASTBILL_PLUS',         'https://my.fastbill.com/api/1.0/api.php');
 define('FASTBILL_AUTOMATIC',    'https://automatic.fastbill.com/api/1.0/api.php');
 
@@ -31,6 +33,15 @@ class FastBill
             return false;
         }
     }
+
+    /**
+     * @return Articles
+     */
+    public function getArticles()
+    {
+        return new Articles($this);
+    }
+
 
     public function setDebug($_bool = false)
     {
