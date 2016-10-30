@@ -19,9 +19,9 @@ class Articles extends AbstractResource implements ResourceInterface
      */
     public function getAll()
     {
-        $newUri = null;
+        // $newUri = null;
 
-        $newUri = '?' . http_build_query(array('updated_since' => $this->_appendUpdatedSinceParam($updatedSince)));
+        // $newUri = '?' . http_build_query(array('updated_since' => $this->_appendUpdatedSinceParam($updatedSince)));
 
         $this->_service = self::FASTBILL_SERVICE;
         return parent::getAll();
