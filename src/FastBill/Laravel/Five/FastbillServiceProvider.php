@@ -2,7 +2,7 @@
 namespace Fastbill\Laravel\Five;
 
 use Illuminate\Support\ServiceProvider;
-use Fastbill\Fasbill;
+use Fastbill\Fastbill;
 
 /**
  * Class FastbillServiceProvider
