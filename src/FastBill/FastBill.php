@@ -24,7 +24,7 @@ class FastBill
         {
             $this->email = $_email;
             $this->apiKey = $_apiKey;
-            $this->apiUrl = $_apiUrl;
+            $this->apiUrl = $_apiUrl; 
         }
         else
         {
