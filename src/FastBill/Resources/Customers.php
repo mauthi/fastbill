@@ -13,7 +13,7 @@ use Fastbill\Fastbill;
 class Customers extends AbstractResource implements ResourceInterface
 {
     const FASTBILL_SERVICE = 'customer.get';
-    const FASTBILL_RESOURCE = 'CUSTOMER';
+    const FASTBILL_RESOURCE = 'CUSTOMERS';
 
     /**
      * @return string
