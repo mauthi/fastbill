@@ -8,6 +8,6 @@ namespace Fastbill\Exceptions;
  * @namespace    Fastbill\Exceptions
  * @author     Mauthi <mauthi@gmail.com>
  */
-class FastbillException extends Exception {
+class FastbillException extends \Exception {
 
 }
