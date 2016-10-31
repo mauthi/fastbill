@@ -3,6 +3,7 @@
 namespace Fastbill\Resources;
 
 use Fastbill\Fastbill;
+use Fastbill\Exceptions\FastbillException;
 
 /**
  * Class AbstractResource
@@ -30,7 +31,16 @@ abstract class AbstractResource
      */
     public function getAll()
     {
-        return $this->_connection->request(array('SERVICE' => $this->_service));
+        return $this->request($this->_service);
+    }
+
+
+    private function request($service) {
+        $result = $this->_connection->request(array('SERVICE' => $service));
+        if (isset($result["RESPONSE"]["ERRORS"]))
+            throw new FastbillException("Error in Fastbill Request\nResult: ".print_r($result,true));
+        
+        return $result;
     }
 
     // /**
