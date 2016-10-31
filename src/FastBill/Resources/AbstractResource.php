@@ -13,6 +13,7 @@ use Fastbill\Exceptions\FastbillException;
  */
 abstract class AbstractResource
 {
+    const FASTBILL_LIMIT = 100;
     private $_connection;
     protected $_service;
 
@@ -27,16 +28,38 @@ abstract class AbstractResource
     }
 
     /**
-     * @return string
+     * @param string $service
+     * @param string $resource
+     * @return array
      */
-    public function getAll()
+    public function getAllForServiceAndResource($service, $resource)
     {
-        return $this->request($this->_service);
+        $limit = self::FASTBILL_LIMIT;
+        $offset = 0;
+        $result = array();
+
+        $loopCount = 0;
+        do {
+            $loopCount++;
+            $limitOffsetResult = $this->getResultOrEmptyArray($this->request($service, $limit, $offset), $resource);
+            //echo "LoopCount {$loopCount}: Limit: $limit / Offset: $offset / Size: ".sizeof($limitOffsetResult);
+            $result = array_merge($result,$limitOffsetResult);
+            $offset += $limit;
+        } while (sizeof($limitOffsetResult) > 0 && sizeof($limitOffsetResult) == $limit);
+
+        return $result;
+    }
+
+    protected function getResultOrEmptyArray($result, $key) {
+        if (isset($result["RESPONSE"][$key]))
+            return $result["RESPONSE"][$key];
+
+        return array();
     }
 
 
-    private function request($service) {
-        $result = $this->_connection->request(array('SERVICE' => $service));
+    private function request($service, $limit, $offset) {
+        $result = $this->_connection->request(array('SERVICE' => $service, 'LIMIT' => $limit, 'OFFSET' => $offset));
         if (isset($result["RESPONSE"]["ERRORS"]))
             throw new FastbillException("Error in Fastbill Request\nResult: ".print_r($result,true));
         

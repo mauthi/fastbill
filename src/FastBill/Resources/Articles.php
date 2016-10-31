@@ -15,7 +15,7 @@ class Articles extends AbstractResource implements ResourceInterface
     const FASTBILL_SERVICE = 'article.get';
     const FASTBILL_RESOURCE = 'ARTICLES';
 
-	/**
+    /**
      * @return string
      */
     public function getAll()
@@ -25,11 +25,7 @@ class Articles extends AbstractResource implements ResourceInterface
         // $newUri = '?' . http_build_query(array('updated_since' => $this->_appendUpdatedSinceParam($updatedSince)));
 
         $this->_service = self::FASTBILL_SERVICE;
-        $result = parent::getAll();
-        if (isset($result["RESPONSE"][self::FASTBILL_RESOURCE]))
-            return $result["RESPONSE"][self::FASTBILL_RESOURCE];
-
-        return array();
+        return parent::getAllForServiceAndResource(self::FASTBILL_SERVICE, self::FASTBILL_RESOURCE);
     }
 
 }
