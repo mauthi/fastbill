@@ -7,6 +7,7 @@
 namespace FastBill;
 
 use Fastbill\Resources\Articles;
+use Fastbill\Resources\Invoices;
 
 define('FASTBILL_PLUS',         'https://my.fastbill.com/api/1.0/api.php');
 define('FASTBILL_AUTOMATIC',    'https://automatic.fastbill.com/api/1.0/api.php');
@@ -42,6 +43,13 @@ class FastBill
         return new Articles($this);
     }
 
+    /**
+     * @return Invoices
+     */
+    public function getInvoices()
+    {
+        return new Invoices($this);
+    }
 
     public function setDebug($_bool = false)
     {
