@@ -12,7 +12,7 @@ use Fastbill\Fastbill;
  */
 class Invoices extends AbstractResource implements ResourceInterface
 {
-    const FASTBILL_SERVICE = 'invoices.get';
+    const FASTBILL_SERVICE = 'invoice.get';
     const FASTBILL_RESOURCE = 'INVOICES';
 
     /**
