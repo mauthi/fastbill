@@ -10,6 +10,7 @@ use Fastbill\Resources\Articles;
 use Fastbill\Resources\Expenses;
 use Fastbill\Resources\Invoices;
 use Fastbill\Resources\Customers;
+use Fastbill\Resources\RecurringInvoices;
 
 define('FASTBILL_PLUS',         'https://my.fastbill.com/api/1.0/api.php');
 define('FASTBILL_AUTOMATIC',    'https://automatic.fastbill.com/api/1.0/api.php');
@@ -62,11 +63,11 @@ class FastBill
     }
 
     /**
-     * @return ReccouringInvoices
+     * @return getRecurringInvoices
      */
-    public function getReccouringInvoices()
+    public function getRecurringInvoices()
     {
-        return new ReccouringInvoices($this);
+        return new RecurringInvoices($this);
     }
 
     /**
