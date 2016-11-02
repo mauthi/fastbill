@@ -7,6 +7,7 @@
 namespace FastBill;
 
 use Fastbill\Resources\Articles;
+use Fastbill\Resources\Expenses;
 use Fastbill\Resources\Invoices;
 use Fastbill\Resources\Customers;
 
@@ -45,11 +46,27 @@ class FastBill
     }
 
     /**
+     * @return Expenses
+     */
+    public function getExpenses()
+    {
+        return new Expenses($this);
+    }
+
+    /**
      * @return Invoices
      */
     public function getInvoices()
     {
         return new Invoices($this);
+    }
+
+    /**
+     * @return ReccouringInvoices
+     */
+    public function getReccouringInvoices()
+    {
+        return new ReccouringInvoices($this);
     }
 
     /**
