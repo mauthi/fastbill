@@ -74,7 +74,7 @@ abstract class AbstractResource
     }
 
     private function filterResult($result) {
-        array_walk_recursive($result, function filterResult(&$value) {
+        array_walk_recursive($result, function(&$value) {
             $value = htmlspecialchars_decode($value);
         });
         return $result;
