@@ -12,20 +12,15 @@ use Fastbill\Fastbill;
  */
 class Customers extends AbstractResource implements ResourceInterface
 {
-    const FASTBILL_SERVICE = 'customer.get';
+    const FASTBILL_SERVICE = 'customer';
     const FASTBILL_RESOURCE = 'CUSTOMERS';
+    const FASTBILL_RESOURCE_KEY = 'CUSTOMER_ID';
 
     /**
-     * @return string
+     * @param Connection $connection
      */
-    public function getAll()
+    public function __construct(Fastbill $connection)
     {
-        // $newUri = null;
-
-        // $newUri = '?' . http_build_query(array('updated_since' => $this->_appendUpdatedSinceParam($updatedSince)));
-
-        $this->_service = self::FASTBILL_SERVICE;
-        return parent::getAllForServiceAndResource(self::FASTBILL_SERVICE, self::FASTBILL_RESOURCE);
+        parent::__construct($connection, self::FASTBILL_SERVICE, self::FASTBILL_RESOURCE, self::FASTBILL_RESOURCE_KEY);
     }
-
 }
