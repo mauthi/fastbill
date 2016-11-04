@@ -64,7 +64,13 @@ abstract class AbstractResource
         $filter = array();
         $filter[$this->_resourceKey] = $id;
 
-        $this->getResultOrDefaultValue($this->getRequest($service, 1, 0, $filter), $resource, false);
+        $response = $this->getRequest($service, 1, 0, $filter);
+        $result = $this->getResultOrDefaultValue($response, $resource, false);
+
+        if (!isset($result[0]))
+            throw new FastbillException("Resource with ".$this->_resourceKey." = {$id} not found in Fastbill (Service: {$service})\nResponse: ".print_r($response,true));
+
+        return $result[0];
     }
 
     /**
