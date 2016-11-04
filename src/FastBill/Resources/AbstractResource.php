@@ -52,7 +52,7 @@ abstract class AbstractResource
             $offset += $limit;
         } while (sizeof($limitOffsetResult) > 0 && sizeof($limitOffsetResult) == $limit);
 
-        return $result;
+        return $this->filterResult($result);
     }
 
     /**
@@ -70,7 +70,14 @@ abstract class AbstractResource
         if (!isset($result[0]))
             throw new FastbillException("Resource with ".$this->_resourceKey." = {$id} not found in Fastbill (Service: {$service})\nResponse: ".print_r($response,true));
 
-        return $result[0];
+        return $this->filterResult($result[0]);
+    }
+
+    private function filterResult($result) {
+        array_walk_recursive($result, function filterResult(&$value) {
+            $value = htmlspecialchars_decode($value);
+        });
+        return $result;
     }
 
     /**
