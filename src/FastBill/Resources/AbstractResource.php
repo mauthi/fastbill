@@ -70,7 +70,7 @@ abstract class AbstractResource
     /**
      * @return array Array of created resource or false
      */
-    public function create($data)
+    public function create(array $data)
     {
         $service = $this->_service.".create";
         $result = $this->postRequest($service, $data);
@@ -84,7 +84,7 @@ abstract class AbstractResource
     /**
      * @return array Array of updated resource or false
      */
-    public function update($id, $data)
+    public function update($id, array $data)
     {
         $data[$this->_resourceKey] = $id;
         $service = $this->_service.".update";

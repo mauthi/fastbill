@@ -13,6 +13,6 @@ interface ResourceInterface
     public function getAll();
     // public function getInactive();
     // public function getActive();
-    public function create();
-    public function update();
+    public function create(array $data);
+    public function update($id, array $data);
 }
