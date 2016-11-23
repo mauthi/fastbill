@@ -70,6 +70,9 @@ abstract class AbstractResource
         if (!isset($result[0]))
             throw new FastbillException("Resource with ".$this->_resourceKey." = {$id} not found in Fastbill (Service: {$service})\nResponse: ".print_r($response,true));
 
+         if (!$result[0][$this->_resourceKey] !== $id)
+            throw new FastbillException("Fastbill returned resource with wrong id (Service: {$service})\nResponse: ".print_r($response,true));
+
         return $this->filterResult($result[0]);
     }
 
