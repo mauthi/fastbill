@@ -9,6 +9,7 @@ namespace Fastbill;
 use Fastbill\Resources\Articles;
 use Fastbill\Resources\Expenses;
 use Fastbill\Resources\Invoices;
+use Fastbill\Resources\Projects;
 use Fastbill\Resources\Customers;
 use Fastbill\Resources\RecurringInvoices;
 
@@ -76,6 +77,14 @@ class Fastbill
     public function getCustomers()
     {
         return new Customers($this);
+    }
+
+    /**
+     * @return Customers
+     */
+    public function getProjects()
+    {
+        return new Projects($this);
     }
 
     public function setDebug($_bool = false)
