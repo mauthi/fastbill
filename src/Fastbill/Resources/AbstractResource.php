@@ -15,10 +15,10 @@ abstract class AbstractResource
 {
     const FASTBILL_LIMIT = 100;
     const SUCCESS = "success";
-    private $_connection;
-    private $_service;
-    private $_resource;
-    private $_resourceKey;
+    protected $_connection;
+    protected $_service;
+    protected $_resource;
+    protected $_resourceKey;
 
     /**
      * AbstractResource constructor.
@@ -35,7 +35,7 @@ abstract class AbstractResource
     /**
      * @return array
      */
-    public function getAll()
+    public function getAll($filter = [])
     {
         $limit = self::FASTBILL_LIMIT;
         $offset = 0;
@@ -46,7 +46,7 @@ abstract class AbstractResource
         $loopCount = 0;
         do {
             $loopCount++;
-            $limitOffsetResult = $this->getResultOrDefaultValue($this->getRequest($service, $limit, $offset), $resource, array());
+            $limitOffsetResult = $this->getResultOrDefaultValue($this->getRequest($service, $limit, $offset, $filter), $resource, array());
             //echo "LoopCount {$loopCount}: Limit: $limit / Offset: $offset / Size: ".sizeof($limitOffsetResult);
             $result = array_merge($result,$limitOffsetResult);
             $offset += $limit;
@@ -76,7 +76,7 @@ abstract class AbstractResource
         return $this->filterResult($result[0]);
     }
 
-    private function filterResult($result) {
+    protected function filterResult($result) {
         array_walk_recursive($result, function(&$value) {
             $value = htmlspecialchars_decode($value);
         });
@@ -132,17 +132,17 @@ abstract class AbstractResource
     }
 
 
-    private function getRequest($service, $limit = self::FASTBILL_LIMIT, $offset = 0, $filter = array()) {
+    protected function getRequest($service, $limit = self::FASTBILL_LIMIT, $offset = 0, $filter = array()) {
         $requestData = array('SERVICE' => $service, 'LIMIT' => $limit, 'OFFSET' => $offset, 'FILTER' => $filter);
         return $this->request($requestData);
     }
 
-    private function postRequest($service, $data) {
+    protected function postRequest($service, $data) {
         $requestData = array('SERVICE' => $service, 'DATA' => $data);
         return $this->request($requestData);
     }
 
-    private function request($requestData) {
+    protected function request($requestData) {
         $result = $this->_connection->request($requestData);
         if (isset($result["RESPONSE"]["ERRORS"]))
             throw new FastbillException("Error in Fastbill Request\nRequest: ".print_r($requestData,true)."\nResult: ".print_r($result,true));
