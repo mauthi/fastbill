@@ -3,6 +3,7 @@
 namespace Fastbill\Resources;
 
 use Fastbill\Fastbill;
+use Fastbill\Exceptions\FastbillException;
 
 /**
  * Class Projects
