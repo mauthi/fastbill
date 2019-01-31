@@ -22,9 +22,9 @@ class Fastbill
 {
     private $_connection;
 
-    public function __construct($_email, $_apiKey, $_apiUrl = FASTBILL_PLUS)
+    public function __construct($_email, $_apiKey, $_apiUrl = FASTBILL_PLUS, $_debug = false)
     {
-        $this->_connection = new Connection(array( 'email' => $_email, 'apiKey' => $_apiKey, 'apiUrl' => $_apiUrl));
+        $this->_connection = new Connection(array( 'email' => $_email, 'apiKey' => $_apiKey, 'apiUrl' => $_apiUrl, 'debug' => $_debug));
 
         $this->articles = new Articles($this->_connection);
         $this->expenses = new Expenses($this->_connection);

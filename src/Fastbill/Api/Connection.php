@@ -7,6 +7,8 @@ use GuzzleRetry\GuzzleRetryMiddleware;
 use Exception, InvalidArgumentException;
 use GuzzleHttp\Exception\ClientException;
 use Fastbill\Exceptions\FastbillException;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Connection
@@ -14,6 +16,7 @@ use Fastbill\Exceptions\FastbillException;
  * @namespace    Fastbill\Api
  * @author     Mauthi <mauthi@gmail.com>
  */
+
 class Connection
 {
     /**
@@ -25,6 +28,7 @@ class Connection
         'email' => '',
         'apiKey' => '',
         'apiUrl' => '',
+        'debug' => false,
     ];
 
     /**
@@ -66,6 +70,18 @@ class Connection
             $this->httpClient = new GuzzleClient([
                 'handler' => $stack,
                 'base_uri' => $this->getOption("apiUrl"),
+                'on_retry_callback' => function($attemptNumber, $delay, $request, $options, $response) {
+    
+                    if ($this->getOption("debug")) {
+                        echo sprintf(
+                            "Retrying request to %s.  Server responded with %s.  Will wait %s seconds.  This is attempt #%s\n",
+                            $request->getUri()->getPath(),
+                            $response->getStatusCode(),
+                            number_format($delay, 2),
+                            $attemptNumber
+                        );
+                    }
+                },
             ]);
         }
 

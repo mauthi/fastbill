@@ -31,7 +31,7 @@ class FastbillServiceProvider extends ServiceProvider {
         $this->app->singleton(Fastbill::class, function($app) use ($options)
         {
             $fastbill = $app['config']['services.fastbill'];
-            return new Fastbill($fastbill['email'], $fastbill['api_key'], $fastbill['api_url']);
+            return new Fastbill($fastbill['email'], $fastbill['api_key'], $fastbill['api_url'], $fastbill['debug']);
         });
     }
 
