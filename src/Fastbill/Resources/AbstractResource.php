@@ -2,7 +2,7 @@
 
 namespace Fastbill\Resources;
 
-use Fastbill\Fastbill;
+use Fastbill\Api\Connection;
 use Fastbill\Exceptions\FastbillException;
 
 /**
@@ -24,7 +24,7 @@ abstract class AbstractResource
      * AbstractResource constructor.
      * @param Connection $connection
      */
-    public function __construct(Fastbill $connection, $service, $resource, $resourceKey)
+    public function __construct(Connection $connection, $service, $resource, $resourceKey)
     {
         $this->_connection = $connection;
         $this->_service = $service;

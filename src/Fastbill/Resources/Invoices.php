@@ -2,7 +2,7 @@
 
 namespace Fastbill\Resources;
 
-use Fastbill\Fastbill;
+use Fastbill\Api\Connection;
 
 /**
  * Class Invoices
@@ -19,7 +19,7 @@ class Invoices extends AbstractResource implements ResourceInterface
     /**
      * @param Connection $connection
      */
-    public function __construct(Fastbill $connection)
+    public function __construct(Connection $connection)
     {
         parent::__construct($connection, self::FASTBILL_SERVICE, self::FASTBILL_RESOURCE, self::FASTBILL_RESOURCE_KEY);
     }
