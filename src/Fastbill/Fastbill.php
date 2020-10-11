@@ -59,7 +59,7 @@ class Fastbill
     }
 
     /**
-     * @return getRecurringInvoices
+     * @return RecurringInvoices
      */
     public function getRecurringInvoices()
     {
