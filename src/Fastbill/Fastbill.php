@@ -75,7 +75,7 @@ class Fastbill
     }
 
     /**
-     * @return Customers
+     * @return Projects
      */
     public function getProjects()
     {
