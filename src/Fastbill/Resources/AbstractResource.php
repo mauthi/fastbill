@@ -116,7 +116,7 @@ abstract class AbstractResource
      * @param array $data
      * @return string 
      */
-    public function updateOrCreate($id, array $data) {
+    public function updateOrCreate(?int $id, array $data) {
         if (is_null($id))
             return $this->create($data);
         else
